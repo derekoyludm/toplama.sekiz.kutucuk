@@ -2,11 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>8 Sayı Toplama</title>
 
 <style>
@@ -17,135 +13,163 @@
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background-color:#f4f6f9;
+    margin:0;
+    min-height:100vh;
+    padding:20px;
+    background:#eef2f5;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
     display:flex;
     justify-content:center;
     align-items:center;
-    min-height:100vh;
-    width:100vw;
-    margin:0;
-    padding:15px;
 }
 
+/* CONTAINER (KDV tarzı) */
 .container{
-    background-color:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
     width:100%;
-    max-width:420px;
-    text-align:center;
+    max-width:470px;
+    background:#fff;
+    border-radius:18px;
+    padding:26px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    display:flex;
+    flex-direction:column;
 }
 
+/* TITLE */
 h2{
+    margin:0 0 18px 0;
+    text-align:center;
+    font-size:20px;
     color:#2c3e50;
-    margin-top:0;
-    margin-bottom:20px;
-    font-size:22px;
 }
 
+/* INPUT GROUP */
 .input-group{
     margin-bottom:14px;
-    text-align:left;
 }
 
 label{
-    font-size:13px;
-    color:#7f8c8d;
-    font-weight:bold;
     display:block;
     margin-bottom:6px;
+    font-size:13px;
+    color:#6b7a90;
+    font-weight:500;
 }
 
+/* FIELD */
 .field-container{
     display:flex;
-    align-items:center;
     gap:8px;
-    width:100%;
+    align-items:center;
 }
 
-.field-container input{
+/* INPUT */
+input{
     width:100%;
-    min-width:0;
+    height:46px;
+    border:1.5px solid #c9d2dc;
+    border-radius:8px;
+    font-size:15px;
+    text-align:center;
+    transition:.15s;
 }
 
-input[type="text"]{
+input:focus{
+    outline:none;
+    border-color:#8fd4ae;
+    box-shadow:0 0 0 4px rgba(143,212,174,0.35);
+}
+
+/* CLEAR BTN */
+.clear-btn{
+    width:46px;
+    min-width:46px;
+    height:46px;
+    border-radius:8px;
+    background:#3498db;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* BUTTON ROW */
+.button-row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+/* HESAPLA */
+.main-btn{
     flex:1;
     height:46px;
-    padding:0 12px;
-    border:2px solid #bdc3c7;
-    border-radius:6px;
-    font-size:16px;
-    text-align:center;
-    transition:border-color 0.3s;
-    -webkit-appearance:none;
-    appearance:none;
+    border:1.5px solid #c9d2dc;
+    border-radius:8px;
+    background:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:.15s;
 }
 
-input[type="text"]:focus{
-    border-color:#9b59b6;
-    outline:none;
+.main-btn.clicked{
+    border-color:#8fd4ae !important;
+    box-shadow:0 0 0 4px rgba(143,212,174,0.45) !important;
 }
 
-.clear-btn{
-    width:40px;
+/* RESET */
+.reset-btn{
+    width:46px;
+    min-width:46px;
     height:46px;
-    background:#3498db;
     border-radius:8px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-size:22px;
-    font-weight:bold;
+    border:1.5px solid #c9d2dc;
+    background:#fff;
     cursor:pointer;
-    user-select:none;
-    flex-shrink:0;
-    touch-action:manipulation;
+    font-size:18px;
+    transition:.15s;
 }
 
-.clear-btn:hover{
-    background:#2587ca;
+.reset-btn.active{
+    border-color:#e74c3c;
+    box-shadow:0 0 0 4px rgba(231,76,60,0.35);
 }
 
-button{
-    background-color:#9b59b6;
-    color:white;
-    border:none;
-    height:48px;
-    font-size:16px;
-    border-radius:6px;
-    cursor:pointer;
-    width:100%;
-    font-weight:bold;
-    transition:background-color 0.3s;
-    margin-top:10px;
-    -webkit-appearance:none;
-}
-
-button:hover{
-    background-color:#8e44ad;
-}
-
+/* RESULT */
 .result{
-    margin-top:20px;
-    padding:18px;
-    background-color:#f5eef8;
-    border-radius:8px;
     display:none;
+    margin-top:18px;
+    background:#f7fbf9;
+    padding:15px;
+    border-radius:10px;
 }
 
 .result p{
     margin:0;
-    font-size:18px;
-    font-weight:bold;
+    font-weight:600;
     color:#2c3e50;
 }
 
-.toplam-renk{
+.highlight{
+    float:right;
+    font-weight:700;
+}
+
+.total{
     color:#27ae60;
-    font-size:24px;
+    font-size:22px;
+}
+
+/* FOOTER */
+.creator{
+    margin-top:auto;
+    padding-top:15px;
+    text-align:center;
+    font-size:12px;
+    color:#9aa6b2;
 }
 
 </style>
@@ -159,103 +183,103 @@ button:hover{
 
 <div id="kutular"></div>
 
-<button onclick="toplamHesapla()">
-Toplamı Hesapla
-</button>
+<div class="button-row">
+    <button class="main-btn" id="hesaplaBtn" onclick="toplamHesapla()">Hesapla</button>
+    <button class="reset-btn" onclick="resetle(event)">↺</button>
+</div>
 
 <div class="result" id="sonucAlani">
-
-<p>
-Toplam<br><br>
-<span class="toplam-renk" id="toplamSonuc">0,00</span>
-</p>
-
+    <p>
+        Toplam
+        <span class="highlight total" id="toplamSonuc">0,00</span>
+    </p>
 </div>
+
+<div class="creator">Created by Fatih Mersin</div>
 
 </div>
 
 <script>
 
-for(let i = 1; i <= 8; i++){
+// INPUTLAR
+for(let i=1;i<=8;i++){
 
     document.getElementById("kutular").innerHTML += `
-
     <div class="input-group">
-
         <label>${i}. Sayı</label>
-
         <div class="field-container">
 
-            <input
-            type="text"
+            <input type="text"
             id="sayi${i}"
             inputmode="decimal"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
-            onkeydown="if(event.key==='Enter'){event.preventDefault();toplamHesapla();}"
-            >
+            oninput="resetUI()"
+            onkeydown="enterKontrol(event,${i})">
 
-            <div
-            class="clear-btn"
-            ontouchstart="temizleKutu(event,'sayi${i}')"
-            onclick="temizleKutu(event,'sayi${i}')"
-            >×</div>
+            <div class="clear-btn" onclick="temizle('sayi${i}')">×</div>
 
         </div>
-
-    </div>
-
-    `;
-
+    </div>`;
 }
 
-function temizleKutu(event,id){
+// ENTER GEÇİŞ
+function enterKontrol(e,i){
+    if(e.key==="Enter"){
+        e.preventDefault();
 
-    event.preventDefault();
-
-    let input = document.getElementById(id);
-
-    input.value = "";
-
-    setTimeout(function(){
-
-        input.focus();
-
-    },10);
-
+        if(i<8){
+            document.getElementById("sayi"+(i+1)).focus();
+        }else{
+            toplamHesapla();
+        }
+    }
 }
 
-function temizleVeCevir(deger){
-
-    let temiz = deger.trim()
-        .replace(/\./g,'')
-        .replace(',','.');
-
-    return parseFloat(temiz) || 0;
-
+// TEMİZLE
+function temizle(id){
+    document.getElementById(id).value="";
+    resetUI();
+    setTimeout(()=>document.getElementById(id).focus(),10);
 }
 
+// PARSE
+function parseTR(v){
+    return parseFloat(v.trim().replace(/\./g,"").replace(",", ".")) || 0;
+}
+
+// TOPLAM
 function toplamHesapla(){
 
-    let toplam = 0;
+    document.getElementById("hesaplaBtn").classList.add("clicked");
 
-    for(let i = 1; i <= 8; i++){
+    let toplam=0;
 
-        let raw = document.getElementById("sayi" + i).value;
-
-        toplam += temizleVeCevir(raw);
-
+    for(let i=1;i<=8;i++){
+        toplam += parseTR(document.getElementById("sayi"+i).value);
     }
 
     document.getElementById("toplamSonuc").innerText =
-        toplam.toLocaleString('tr-TR',{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
+    toplam.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2});
 
-    document.getElementById("sonucAlani").style.display = "block";
+    document.getElementById("sonucAlani").style.display="block";
+}
+
+// RESET UI
+function resetUI(){
+    document.getElementById("hesaplaBtn").classList.remove("clicked");
+    document.getElementById("sonucAlani").style.display="none";
+    document.querySelector(".reset-btn").classList.remove("active");
+}
+
+// RESET
+function resetle(e){
+
+    e.preventDefault();
+
+    document.querySelectorAll("input").forEach(i=>i.value="");
+
+    resetUI();
+
+    document.querySelector(".reset-btn").classList.add("active");
 
 }
 
