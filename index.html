@@ -23,7 +23,6 @@ body{
     align-items:center;
 }
 
-/* CONTAINER (KDV tarzı) */
 .container{
     width:100%;
     max-width:470px;
@@ -35,7 +34,6 @@ body{
     flex-direction:column;
 }
 
-/* TITLE */
 h2{
     margin:0 0 18px 0;
     text-align:center;
@@ -43,7 +41,6 @@ h2{
     color:#2c3e50;
 }
 
-/* INPUT GROUP */
 .input-group{
     margin-bottom:14px;
 }
@@ -56,14 +53,12 @@ label{
     font-weight:500;
 }
 
-/* FIELD */
 .field-container{
     display:flex;
     gap:8px;
     align-items:center;
 }
 
-/* INPUT */
 input{
     width:100%;
     height:46px;
@@ -80,7 +75,6 @@ input:focus{
     box-shadow:0 0 0 4px rgba(143,212,174,0.35);
 }
 
-/* CLEAR BTN */
 .clear-btn{
     width:46px;
     min-width:46px;
@@ -96,14 +90,12 @@ input:focus{
     cursor:pointer;
 }
 
-/* BUTTON ROW */
 .button-row{
     display:flex;
     gap:10px;
     margin-top:10px;
 }
 
-/* HESAPLA */
 .main-btn{
     flex:1;
     height:46px;
@@ -120,7 +112,6 @@ input:focus{
     box-shadow:0 0 0 4px rgba(143,212,174,0.45) !important;
 }
 
-/* RESET */
 .reset-btn{
     width:46px;
     min-width:46px;
@@ -138,7 +129,6 @@ input:focus{
     box-shadow:0 0 0 4px rgba(231,76,60,0.35);
 }
 
-/* RESULT */
 .result{
     display:none;
     margin-top:18px;
@@ -163,7 +153,6 @@ input:focus{
     font-size:22px;
 }
 
-/* FOOTER */
 .creator{
     margin-top:auto;
     padding-top:15px;
@@ -249,6 +238,9 @@ function parseTR(v){
 // TOPLAM
 function toplamHesapla(){
 
+    // 🔥 tüm focusları kaldır (yeşil glow gider)
+    document.querySelectorAll("input").forEach(i => i.blur());
+
     document.getElementById("hesaplaBtn").classList.add("clicked");
 
     let toplam=0;
@@ -265,6 +257,10 @@ function toplamHesapla(){
 
 // RESET UI
 function resetUI(){
+
+    // 🔥 focus temizle
+    document.querySelectorAll("input").forEach(i => i.blur());
+
     document.getElementById("hesaplaBtn").classList.remove("clicked");
     document.getElementById("sonucAlani").style.display="none";
     document.querySelector(".reset-btn").classList.remove("active");
@@ -280,7 +276,6 @@ function resetle(e){
     resetUI();
 
     document.querySelector(".reset-btn").classList.add("active");
-
 }
 
 </script>
